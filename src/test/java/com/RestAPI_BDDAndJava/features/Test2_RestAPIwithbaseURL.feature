@@ -5,11 +5,11 @@ Feature: API Testing with REST Assured Configuration file
     When user send a Get request with endpoint
     Then user verify status code was 200
     And user verify the response values for Get calling
-      | id  | 1                                   |
-      | email         |                                       george.bluth@reqres.in |
-      | first_name     | George|
-      | last_name | Bluth                                  |
-      | avatar      | https://reqres.in/img/faces/1-image.jpg                 |
+      | id         | 1                                       |
+      | email      | george.bluth@reqres.in                  |
+      | first_name | George                                  |
+      | last_name  | Bluth                                   |
+      | avatar     | https://reqres.in/img/faces/1-image.jpg |
 
   Scenario: Verify the status code of the POST calling request
     Given user hit the Base URL
