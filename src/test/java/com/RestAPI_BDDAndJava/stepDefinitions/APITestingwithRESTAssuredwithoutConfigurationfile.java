@@ -20,10 +20,10 @@ import com.RestAPI_BDDAndJava.Test.ScenarioContext;
 
 
 public class APITestingwithRESTAssuredwithoutConfigurationfile {
-	
+
 	private String apiEndpoint;
 	Response res ;
-	 private ScenarioContext scenarioContext = new ScenarioContext();
+	private ScenarioContext scenarioContext = new ScenarioContext();
 
 	@Given("the user API endpoint is {string}")
 	public void theApiEndpointIs(String endpoint) {
@@ -39,7 +39,7 @@ public class APITestingwithRESTAssuredwithoutConfigurationfile {
 		}
 
 		if(requestType.equalsIgnoreCase("DELETE")) {
-			int id = scenarioContext.getId(); 
+			int id = scenarioContext.getId();
 			res =  given()
 					.when().delete(apiEndpoint+"/id");
 
@@ -66,12 +66,12 @@ public class APITestingwithRESTAssuredwithoutConfigurationfile {
 					.body(dataMap)
 					.when().post(apiEndpoint);
 			int id = res.jsonPath().getInt("id");
-            scenarioContext.setId(id);  // Store the id in ScenarioContext
-			
+			scenarioContext.setId(id);  // Store the id in ScenarioContext
+
 
 		}
 		if(requestType.equalsIgnoreCase("PATCH")) {
-		  res =  given()
+			res =  given()
 					.contentType("application/json")
 					.body(dataMap)
 					.when().patch(apiEndpoint);
@@ -81,7 +81,7 @@ public class APITestingwithRESTAssuredwithoutConfigurationfile {
 		if(requestType.equalsIgnoreCase("PUT")) {
 			int id = scenarioContext.getId();  // Retrieve the id from ScenarioContext
 			System.out.println("All geting id: "+id);
-			 res =  given()
+			res =  given()
 					.contentType("application/json")
 					.body(dataMap)
 					.when().put(apiEndpoint+"/id");
