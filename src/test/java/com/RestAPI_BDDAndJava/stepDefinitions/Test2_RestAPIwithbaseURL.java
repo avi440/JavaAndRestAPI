@@ -58,4 +58,25 @@ public class Test2_RestAPIwithbaseURL {
     }
 
 
+    // this All methods are part of json file
+    @Then("^user verify the response values form list users from Json file$")
+    public void verifyGetRequestAndResponse() throws Exception {
+        action.verifytheGetRequest();
+    }
+
+    @Then("^user send a POST request with endpoint from Json file$")
+    public void createUser() throws Exception {
+        action.hitCreateUserRequest();
+
+    }
+
+    @Then("^user verify the response values for Post calling from Json file$")
+    public void verifyPostResponse() throws Exception {
+        action.verifyJsonPostResponse();
+
+
+    }
+
+
+
 }

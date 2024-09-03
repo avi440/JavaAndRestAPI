@@ -13,7 +13,7 @@ import io.restassured.http.ContentType;
 
 public class RestAssuredHelper {
 
-	public Response SpecifyAndSendRequest(String requestType, String url, Map<String, String> requestBody,Map<String, String> queryParams,  Map<String, String> pathParams, String extensionpath) {
+	public Response SpecifyAndSendRequest(String requestType, String url, Map<?, ?> requestBody,Map<String, String> queryParams,  Map<String, String> pathParams, String extensionpath) {
 		
 		// Create a RequestSpecification object
 		RequestSpecification request = RestAssured.given();		

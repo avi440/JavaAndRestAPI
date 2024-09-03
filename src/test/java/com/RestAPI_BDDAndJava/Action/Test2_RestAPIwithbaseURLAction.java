@@ -3,21 +3,26 @@ package com.RestAPI_BDDAndJava.Action;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.RestAPI_BDDAndJava.Test.ScenarioContext;
+
+import io.restassured.response.Response;
+import com.fasterxml.jackson.databind.JsonNode;
+
+
+
 import com.RestAPI_BDDAndJava.testcases.BaseTests;
 import com.RestAPI_BDDAndJava.testcases.RestAssuredHelper;
 import com.RestAPI_BDDAndJava.utilities.ReadConfigAPI;
 import com.RestAPI_BDDAndJava.utilities.TestKeyValueWriteAndRead;
+import com.RestAPI_BDDAndJava.testcases.JsonProcessing;
 
 import io.restassured.response.Response;
 
 public class Test2_RestAPIwithbaseURLAction extends RestAssuredHelper {
-//	 private ScenarioContext scenarioContext = new ScenarioContext();
+	JsonProcessing JsonProcessing = new JsonProcessing();
 	 
 
 	BaseTests test ;
@@ -74,6 +79,46 @@ public class Test2_RestAPIwithbaseURLAction extends RestAssuredHelper {
 	}
 
 	}
+
+	// this All methods are part of json file
+	public void  verifytheGetRequest() throws Exception {
+		JsonNode expectedResponseNode = JsonProcessing.ApiRequestAndResponse("listUser","response");
+		String expectedResponseBody = expectedResponseNode.toString();
+		String actualResponseBody = JsonProcessing.ConvertModelToJSON(response.jsonPath().get()).toString();
+		System.out.println("Actual Response Content:" + actualResponseBody);
+		System.out.println("Expected Response Content:" + expectedResponseBody);
+		assertEquals(actualResponseBody, expectedResponseBody);
+
+
+	}
+
+	public void  hitCreateUserRequest() throws Exception {
+		JsonNode requesteNode = JsonProcessing.ApiRequestAndResponse("CreatePost","response");
+		Map<?, ?>  mapPostRequest = JsonProcessing.ConvertModelToMap(requesteNode);
+
+
+		response = SpecifyAndSendRequest("post",ReadConfigAPI.postcallingRequest(), mapPostRequest , null, null, null);
+
+
+
+
+	}
+
+	public void  verifyJsonPostResponse() throws Exception {
+		JsonNode expectedResponseNode = JsonProcessing.ApiRequestAndResponse("CreatePost","request");
+		String expectedResponseBody = expectedResponseNode.toString();
+
+
+		String actualResponseBody = JsonProcessing.ConvertModelToJSON(response.jsonPath().get()).toString();
+		System.out.println("Actual Response Content:" + actualResponseBody);
+		System.out.println("Expected Response Content:" + expectedResponseBody);
+
+
+
+
+	}
+
+
 	
 
 	

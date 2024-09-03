@@ -5,6 +5,12 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
+
 public class JsonProcessing {
 
 	public ObjectMapper objectMapper = new ObjectMapper();
@@ -13,7 +19,7 @@ public class JsonProcessing {
 	{
 	}
 	
-	public String ConvertModelToJSON(Object model) 
+	public String ConvertModelToJSON(Object model)
 	{		
 		String postModelAsString = null;
 		try 
@@ -29,10 +35,25 @@ public class JsonProcessing {
 		return postModelAsString;		
 	}
 	
-	public Map<?, ?> ConvertModelToMap(Object model) 
+	public Map<?, ?> ConvertModelToMap(Object model)
 	{
 		Map<?, ?> mappedObject = objectMapper.convertValue(model, Map.class);
 		return mappedObject;
 	}
+
+	public JsonNode ApiRequestAndResponse(String path,String RequestorResponse) throws Exception {
+		String filePath = "./RequestAndResponse/"+path+".json"; // Specify the path to your JSON file
+		String jsonContent = new String(Files.readAllBytes(Paths.get(filePath)));
+
+		// Parse JSON content
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(jsonContent);
+
+		// Extract request and expected response
+		JsonNode requestNode = rootNode.get(RequestorResponse);
+		return requestNode;
+	}
+
+
 
 }
