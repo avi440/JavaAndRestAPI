@@ -57,6 +57,19 @@ public class Test2_RestAPIwithbaseURL {
 
     }
 
+    @Then("verify the Schema for request in {string}")
+    public void verifySchema(String jsonSchemaPath) throws Exception {
+        action.verifySchemaForPost(jsonSchemaPath);
+
+    }
+
+    @Then("^user send a (Get|post|put) request with endpoint with queryParams$")
+    public void endpointWithQueryParams(String requestType,DataTable dataTable) {
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        action.getEndPointCallingwithqueryParams(requestType, dataMap);
+
+    }
+
 
     // this All methods are part of json file
     @Then("^user verify the response values form list users from Json file$")

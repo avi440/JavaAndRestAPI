@@ -6,10 +6,13 @@ import java.util.Map;
 
 import com.RestAPI_BDDAndJava.utilities.ReadConfigAPI;
 
+import io.restassured.module.jsv.JsonSchemaValidator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+
+
 
 
 public class BaseTests {
@@ -46,5 +49,14 @@ public class BaseTests {
 		System.out.println("Expected Response Content:" + expectedResponseBody);
 
 		assertEquals(expectedResponseBody, actualResponseBody);
-	}	
+	}
+
+	public void verifySchema(Response response, String  schemafilePath){
+
+		// Validate the JSON schema
+		response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("SchemaRequest/"+schemafilePath+".json"));
+//		response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("SchemaRequest/PostSchemaRequest.json"));
+	}
+
+
 }
