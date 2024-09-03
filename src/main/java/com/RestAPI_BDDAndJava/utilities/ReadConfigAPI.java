@@ -37,8 +37,8 @@ public class ReadConfigAPI {
 		return postcalling;
 	}
 	
-	public static String getBrowser() {
-		String browser = prop.getProperty("browser");
+	public static String schemaVerifiying() {
+		String browser = prop.getProperty("schematesting");
 		return browser;
 	}
 
